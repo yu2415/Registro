@@ -11,15 +11,20 @@ namespace RegistroElettronico
         public string Nome { get; set; }
         public string Cognome { get; set; }
         public string Classe { get; set; }  
-        public string NumeroRegistro { get; set; }
+        public int Matricola { get; set; }
         public Studente() { }
 
-        public Studente(string nome, string cognome, string classe, string numeroRegistro)
+        public Studente(string nome, string cognome, string classe, int matricola)
         {
             Nome = nome;
             Cognome = cognome;
             Classe = classe;
-            NumeroRegistro = numeroRegistro;
+            Matricola = matricola;
+        }
+
+        public override string ToString()
+        {
+            return $"Nome: {Nome}, Cognome: {Cognome}, Classe: {Classe}, N° Matricola {Matricola}";
         }
 
 

@@ -19,6 +19,7 @@ namespace RegistroElettronico
             StudentiClasse = studentiClasse;
         }
 
+        
         public Classe() 
         {
              

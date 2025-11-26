@@ -25,6 +25,11 @@ namespace RegistroElettronico
             Data = data;
         }
 
+        public override string ToString()
+        {
+            return $"{Materia} - {Data.ToString("dd/MM/yyyy")} - {Commento}";
+        }
+
         public Voto() { }
 
         
