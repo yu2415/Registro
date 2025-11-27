@@ -14,7 +14,7 @@ namespace RegistroElettronico
         public int Matricola { get; set; }
         public Studente() { }
 
-        public Studente(string nome, string cognome, string classe, int matricola)
+        public Studente(int matricola , string nome, string cognome, string classe)
         {
             Nome = nome;
             Cognome = cognome;
@@ -27,9 +27,23 @@ namespace RegistroElettronico
             return $"Nome: {Nome}, Cognome: {Cognome}, Classe: {Classe}, N° Matricola {Matricola}";
         }
 
+        public string Serializza()
+        {
+            return $"{Matricola} - {Nome} - {Cognome} - {Classe}";
+        }
 
+        public static Studente Deserializza(string rigaDelFile)
+        {
+            var parti = rigaDelFile.Split("-");
+            int matricola = int.Parse(parti[0]);
+            string nome = parti[1];
+            string cognome = parti[2];
+            string classe = parti[3];
+            return new Studente (matricola, nome, cognome, classe);
 
+        }
 
+        
 
 
     }

@@ -5,30 +5,17 @@
         static void Main(string[] args)
         {
 
-            Studente studente1 = CreaStudente();
-            Console.WriteLine(studente1);
-            Console.WriteLine("studente creato!");
-            Studente studente2 = CreaStudente();
-            Console.WriteLine(studente2);
-            Console.WriteLine("studente creato!");
+            Console.WriteLine("Inserire le proprie credenziali");
+            Console.WriteLine("Numero di Matricola");
 
-            List<Studente> classe1 = new List<Studente> { studente1, studente2 };
-
-            Classe classe = new Classe(4, 'i', classe1);
-
-            AggiornaOrdineComplessivo(classe);
-
-            string result;
-
-            for (int i = 0; i < classe1.Count; i++)
-            {
-                result = classe1[i].ToString();
-                Console.WriteLine(result);
-            }
+            Console.WriteLine("Password");
 
         }
 
-        
+        public static void AccediAccount()
+        {
+
+        }
         
         public static Studente CreaStudente()
         {
@@ -177,7 +164,6 @@
 
         public void AggiungiStudente()
         {
-            Classe classe = new Classe();
             Studente studente = new Studente();
             Console.WriteLine("Inserisci il nome:");
             studente.Nome = Console.ReadLine();
@@ -187,7 +173,6 @@
             studente.Classe = Console.ReadLine();
             Console.WriteLine("Inserisci il numero di registro:");
             studente.Matricola = int.Parse(Console.ReadLine());
-            classe.StudentiClasse.Add(studente);
         }
 
         public void CreaClasse()
@@ -197,10 +182,36 @@
             classe.Anno = int.Parse(Console.ReadLine());
             Console.WriteLine("Inserisci la sezione della classe corrente:");
             classe.Sezione= char.Parse(Console.ReadLine());
-
-
         }
 
+
+        public void ScriviStudente(Studente studente, string fileStudenti)
+        {
+            using (StreamWriter sw = new StreamWriter(fileStudenti))
+            {
+                sw.WriteLine($"{studente.Serializza()}");
+            }
+        }
+
+
+        public string LeggiStudentePerMatrice(int matricola ,string fileStudenti)
+        {
+            using (StreamReader sr = new StreamReader(fileStudenti))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Studente studente = Studente.Deserializza(line);
+                    if (matricola == studente.Matricola)
+                    {
+                        return studente.ToString();
+                    }
+
+                }
+
+                return $"studente con matricola:{matricola} non trovato";
+            }
+        }
 
     }
 }
