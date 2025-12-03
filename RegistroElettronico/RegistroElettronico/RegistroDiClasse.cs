@@ -180,8 +180,29 @@
             studente.Classe = Console.ReadLine();
             Random random = new Random();
             studente.Matricola = random.Next();
+            Console.WriteLine("Inserire la password del docente");
+            studente.Password = Console.ReadLine();
             return studente;
         }
+
+        public static Studente CreaDocente()
+        {
+            Studente studente = new Studente();
+            Console.WriteLine("Inserire il nome del docente");
+            studente.Nome = Console.ReadLine();
+            Console.WriteLine("Inserire il cognome del docente");
+            studente.Cognome = Console.ReadLine();
+            Console.WriteLine("Inserire la classe del docente");
+            studente.Classe = Console.ReadLine();
+            Random random = new Random();
+            studente.Matricola = random.Next();
+            Console.WriteLine("Inserire la password del docente");
+            studente.Password = Console.ReadLine();
+            studente.Permessi = true;
+            return studente;
+        }
+
+
 
         public static Classe CreaClasse()
         {
@@ -224,7 +245,7 @@
             }
         }
 
-        public static Studente LeggiPerCognomeNome(string cognome, string nome, string fileStudenti)
+        public static Studente LeggiStudentePerCognomeNome(string cognome, string nome, string fileStudenti)
         {
 
         }
@@ -250,14 +271,30 @@
             return account;
         }
 
-        public string AggiungiNota()
+        public string AggiungiNota(Studente studenteNotato)
         {
-            Console.WriteLine("Inserire la classe dell'alunno");
-            string classe = Console.ReadLine();
-            Console.WriteLine("Inserire il nome dell'alunno");
-            string nome = Console.ReadLine();
-            Console.WriteLine("Inserire il cognome dell'alunno");
-            string cognome = Console.ReadLine();
+            
+            bool found = false;
+
+            while (!found)
+            {
+                Console.WriteLine("Selezionare il tipo di richiamo\n1.Verbale\n2.Scritto\n3.Di merito");
+                int scelta = int.Parse(Console.ReadLine());
+                switch (scelta)
+                {
+                    case 1:
+
+                        break;
+                    case 2:
+
+                        break;
+                    case 3:
+
+                        break;
+                    default:
+                        break;
+                }
+            }
         }
 
     }

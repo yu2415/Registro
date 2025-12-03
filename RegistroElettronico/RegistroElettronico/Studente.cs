@@ -12,14 +12,20 @@ namespace RegistroElettronico
         public string Cognome { get; set; }
         public string Classe { get; set; }  
         public int Matricola { get; set; }
+        public string Password { get; set; }
+        public bool Permessi { get; set; }
+        public FileAttributes Note {  get; set; }
+
         public Studente() { }
 
-        public Studente(int matricola , string nome, string cognome, string classe)
+        public Studente(int matricola , string nome, string cognome, string classe, string password, bool permessi)
         {
             Nome = nome;
             Cognome = cognome;
             Classe = classe;
             Matricola = matricola;
+            Password = password;
+            Permessi = permessi;
         }
 
         public Studente (int matricola, string nome, string cognome)
