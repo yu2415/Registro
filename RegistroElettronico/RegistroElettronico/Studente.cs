@@ -22,6 +22,13 @@ namespace RegistroElettronico
             Matricola = matricola;
         }
 
+        public Studente (int matricola, string nome, string cognome)
+        {
+            Nome = nome;
+            Cognome = cognome;
+            Matricola = matricola;
+        }
+
         public override string ToString()
         {
             return $"Nome: {Nome}, Cognome: {Cognome}, Classe: {Classe}, N° Matricola {Matricola}";
@@ -42,6 +49,14 @@ namespace RegistroElettronico
             return new Studente (matricola, nome, cognome, classe);
 
         }
+
+        public static int GetMatricola(string rigaDelFile)
+        {
+            var parti = rigaDelFile.Split("-");
+            return int.Parse (parti[0]);
+        }
+
+        
 
         
 

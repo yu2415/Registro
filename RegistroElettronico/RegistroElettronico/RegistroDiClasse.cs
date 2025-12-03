@@ -2,39 +2,44 @@
 {
     internal class RegistroDiClasse
     {
+        
         static void Main(string[] args)
         {
+            List<Account> listAccount = new List<Account>();
+            Account account0 = new Account(0000, "ciao", true);
 
-            Console.WriteLine("Inserire le proprie credenziali");
-            Console.WriteLine("Numero di Matricola");
+            Console.WriteLine("Inserire la matricola");
+            int matricola = int.Parse(Console.ReadLine());
+            LeggiStudentePerMatrice(matricola, "fileStudenti.txt");
 
-            Console.WriteLine("Password");
+            // ACCOUNT PROFESSORE
+            int risp = int.Parse(Console.ReadLine());
+            switch(risp)
+            {
+                case 1:
+                    AggiungiVoto();
+                    break;
+                case 2:
+                    AggiungiNota();
+                    break;
+                    
+                case 3:
+                    CreaStudente();
+                    CreaAccount(CreaStudente().Matricola);
+                    break;
+                case 4:
+                    CreaClasse();
+                    break;
+
+
+
+            }
+
+            
 
         }
 
-        public static void AccediAccount()
-        {
-
-        }
         
-        public static Studente CreaStudente()
-        {
-            Studente studente = new Studente();
-            Console.WriteLine("Inserire il nome dello studente");
-            studente.Nome = Console.ReadLine();
-            Console.WriteLine("Inserire il cognome dello studente");
-            studente.Cognome = Console.ReadLine();
-            Console.WriteLine("Inserire la classe dello studente");
-            studente.Classe = Console.ReadLine();
-
-            Random random = new Random();
-            studente.Matricola = random.Next();
-
-            return studente;
-        }
-
-        
-
         public static Studente MaggiorePerCognomeNomeStudente(Studente studente1, Studente studente2)
         {
             // inizializziamo tutte le variabili che ci servono ad ordinare i nostri due studenti
@@ -71,7 +76,7 @@
 
 
 
-            //per ordinar e facciamo un for usando le lunghezze trovate precedentemente
+            //per ordinare e facciamo un for usando le lunghezze trovate precedentemente
 
             if (!equalCognome)
             {
@@ -130,7 +135,7 @@
         
 
         public static void AggiornaOrdineComplessivo(Classe classe)
-        {
+        {     
             List<Studente> studentiDardinare = classe.StudentiClasse;
 
             for (int i = 0; i < studentiDardinare.Count; i++)
@@ -142,10 +147,9 @@
             }
 
             classe.StudentiClasse = studentiDardinare;
-
         }
 
-        public void AggiungiVoto()
+        public static Voto AggiungiVoto()
         {
             Voto voto= new Voto();
             Console.WriteLine("Inserisci la materia:");
@@ -160,28 +164,33 @@
             }
             Console.WriteLine("Inserisci la data:");
             voto.Data = DateTime.Parse(Console.ReadLine());
+            return voto;
         }
 
-        public void AggiungiStudente()
+        
+
+        public static Studente CreaStudente()
         {
             Studente studente = new Studente();
-            Console.WriteLine("Inserisci il nome:");
+            Console.WriteLine("Inserire il nome dello studente");
             studente.Nome = Console.ReadLine();
-            Console.WriteLine("Inserisci il cognome:");
+            Console.WriteLine("Inserire il cognome dello studente");
             studente.Cognome = Console.ReadLine();
-            Console.WriteLine("Inserisci la classe:");
+            Console.WriteLine("Inserire la classe dello studente");
             studente.Classe = Console.ReadLine();
-            Console.WriteLine("Inserisci il numero di registro:");
-            studente.Matricola = int.Parse(Console.ReadLine());
+            Random random = new Random();
+            studente.Matricola = random.Next();
+            return studente;
         }
 
-        public void CreaClasse()
+        public static Classe CreaClasse()
         {
             Classe classe = new Classe();
             Console.WriteLine("Inserisci l'anno della classe corrente:");
             classe.Anno = int.Parse(Console.ReadLine());
             Console.WriteLine("Inserisci la sezione della classe corrente:");
             classe.Sezione= char.Parse(Console.ReadLine());
+            return classe;
         }
 
 
@@ -194,8 +203,9 @@
         }
 
 
-        public string LeggiStudentePerMatrice(int matricola ,string fileStudenti)
+        public static Studente LeggiStudentePerMatrice(int matricola ,string fileStudenti)
         {
+            
             using (StreamReader sr = new StreamReader(fileStudenti))
             {
                 string line;
@@ -204,13 +214,50 @@
                     Studente studente = Studente.Deserializza(line);
                     if (matricola == studente.Matricola)
                     {
-                        return studente.ToString();
+                        return studente;
                     }
 
                 }
-
-                return $"studente con matricola:{matricola} non trovato";
+                Studente studente1 = new Studente();
+                return studente1;
+                
             }
+        }
+
+        public static Studente LeggiPerCognomeNome(string cognome, string nome, string fileStudenti)
+        {
+
+        }
+
+        public static Account CreaAccount(int matrice)
+        {
+            Account account = new Account();
+            
+            Console.WriteLine("Inserire la password");
+            account.Password = Console.ReadLine();
+            Console.WriteLine("Inserire se si vuole creare l'account di un insegnante o di uno studente (s/n)");
+            string p = Console.ReadLine();
+            if (p.ToLower() == "s")
+            {
+                account.Permessi = true;
+            }
+            else
+            {
+                account.Permessi = false;
+            }
+            
+
+            return account;
+        }
+
+        public string AggiungiNota()
+        {
+            Console.WriteLine("Inserire la classe dell'alunno");
+            string classe = Console.ReadLine();
+            Console.WriteLine("Inserire il nome dell'alunno");
+            string nome = Console.ReadLine();
+            Console.WriteLine("Inserire il cognome dell'alunno");
+            string cognome = Console.ReadLine();
         }
 
     }

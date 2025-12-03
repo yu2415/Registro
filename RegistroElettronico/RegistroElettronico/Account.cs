@@ -8,10 +8,12 @@ namespace RegistroElettronico
 {
     public class Account
     {
-        int Matricola {  get; set; }
-        string Password { get; set; }
-        bool Permessi {  get; set; }
+        public int Matricola {  get; set; }
+        public string Password { get; set; }
+        public bool Permessi {  get; set; }
 
+
+        public Account() { }
         public Account (int matricola, string password, bool permessi)
         {
             Matricola = matricola;
@@ -19,7 +21,8 @@ namespace RegistroElettronico
             Permessi = permessi;
         }
 
-        
+
+
 
     }
 }
